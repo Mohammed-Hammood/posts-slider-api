@@ -1,0 +1,161 @@
+$MAIN_COLOR: #474955;
+
+@mixin CENTER_H{
+    display:flex;
+    justify-content:center;
+}
+@mixin CENTER_BOTH{
+    display:flex;
+    justify-content:center;
+    align-items:center;   
+}
+@mixin CENTER_V{
+    display:flex;
+    align-items:center;   
+}
+@mixin TABLE_BORDER{
+    border:1px solid #E3E6EC;
+}
+@mixin ID_WIDTH {
+    flex:1 1 5%;
+}
+@mixin TITLE_WIDTH {
+    flex:1 1 50%;
+}
+@mixin DESCRIPTION_WIDTH {
+    flex:1 1 45%;
+}
+.container {
+    @include CENTER_H;
+    .main-container {
+        @include CENTER_H;
+        padding:15px;
+        width:99%;
+        max-width: 1200px;
+        flex-direction:column;
+        gap:10px;
+        color:white;
+        font-family: 'Roboto';
+        .search-container {
+            @include CENTER_V;
+            input:focus{
+                outline:2px solid blue;
+            }
+            .posts-count {
+                padding:0 15px;
+                font-size:14px;
+            }
+            .input-container {
+                width:55%;
+                input {
+                    width:100%;
+                    padding:10px;
+                    background:$MAIN_COLOR;
+                    font-size: 14px;
+                    color:white;
+                }
+            }
+            svg {
+                margin-left:-30px;
+                width:15px;
+                cursor: pointer;
+            }
+        }
+        .posts-container {
+            .header {
+                background:$MAIN_COLOR;
+                padding:10px;
+                display:flex;
+                justify-content:space-between;
+                font-size:14px;
+                .active {
+                    border-bottom:1px solid white;
+                }
+                .id {
+                    flex:1 1 1%;
+                    @include CENTER_H;
+                }
+                .title {
+                    flex:1 1 40%;
+                    @include CENTER_H;
+                    @include TITLE_WIDTH;
+                }
+                .description {
+                    flex:1 1 40%;
+                    @include CENTER_H;
+                    @include DESCRIPTION_WIDTH;
+                }
+                button {
+                    border:none;
+                    background:inherit;
+                    cursor:pointer;
+                    svg {
+                        width:10px;
+                        height:11px;
+                        margin-left:15px;
+                    }
+                }
+            }
+            .posts {
+                color:#474955;
+                font-size:13px;
+                .post {
+                    display: flex;
+                    justify-content:space-around;
+                    min-height:75px;
+                    .id {
+                        padding:10px;
+                        min-width:23px;
+                        @include ID_WIDTH;
+                        @include CENTER_BOTH;
+                        @include TABLE_BORDER;
+                    }
+                    .title {
+                        padding:10px;
+                        @include CENTER_V;
+                        @include TABLE_BORDER;
+                        @include TITLE_WIDTH;
+                    }
+                    .description {
+                        @include CENTER_V;
+                        @include TABLE_BORDER;
+                        @include DESCRIPTION_WIDTH;
+                        padding:10px;
+                    }
+                }
+            }
+        }
+        .paggination-container {
+            display: flex;
+            justify-content:space-around;
+            color:#474955;
+            font-style: italic;
+            font-size:18px;
+            .pages {
+                @include CENTER_H;
+                align-items:center;
+                .active {
+                    color:green;
+                }
+                a {
+                    text-decoration:none;
+                    color:#474955;
+                    margin:0 5px;
+                }
+            }
+            button {
+                font-size:24px;
+                border:none;
+                cursor:pointer;
+                background:inherit;
+            }
+            .paggination-numbers {
+                font-style:italic;
+                font-size:18px;
+            }
+            .paggination-numbers:hover, button:hover {
+                text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+}

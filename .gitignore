@@ -11,6 +11,8 @@
 # production
 /build
 
+/src/components/storage.js
+
 # misc
 .DS_Store
 .env.local
