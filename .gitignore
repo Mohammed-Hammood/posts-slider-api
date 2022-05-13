@@ -12,6 +12,7 @@
 /build
 
 /src/components/storage.js
+/.vscode
 
 # misc
 .DS_Store
