@@ -18,36 +18,67 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [totalPages, setTotalPages] = useState(0);
   const [totalSortedPosts, setTotalSortedPosts] = useState(0);
+  
   useEffect(()=> {
         let postsArr = [];
+    
         ((searchValue.length > 0)?searchedPosts:posts).forEach((value, index) => {if(index >= min && index < max){
-          if(sortById==='-id' && currentSort === 'id'){postsArr.push(value);}
-          else if(sortById==='id' && currentSort === 'id'){postsArr.unshift(value);}
-          else  {postsArr.push(value);}}
+          
+          if(sortById==='-id' && currentSort === 'id'){
+            postsArr.push(value);
+          }
+          else if(sortById==='id' && currentSort === 'id'){
+            postsArr.unshift(value);
+          }
+          else  {
+            postsArr.push(value);
+          }
+        }
         });
         if(searchValue.length > 0){
           const totalPages = Math.ceil(searchedPosts.length/10);
           setTotalPages(totalPages || 1);
           setTotalSortedPosts(searchedPosts.length);
-          if(currentPage > totalPages){setCurrentPage(1);setMax(10);setMin(0);}
-        }else {setTotalPages(Math.ceil(posts.length/10));setTotalSortedPosts(posts.length);}
+          
+          if(currentPage > totalPages){
+            setCurrentPage(1);
+            setMax(10);
+            setMin(0);
+          }
+        }else {
+          setTotalPages(Math.ceil(posts.length/10));
+          setTotalSortedPosts(posts.length);
+        }
         
         function Sort(direction){
           for(let i =0; i < postsArr.length; i++){
             let index = i;
             for(let j=i; j < postsArr.length; j++){
-              if(postsArr[j].title < postsArr[index].title && direction === '-t'){index = j;}
-              else if(postsArr[j].title > postsArr[index].title && direction === 't'){index = j;}
-              else if(postsArr[j].body < postsArr[index].body && direction === '-d'){index = j;}
-              else if(postsArr[j].body > postsArr[index].body && direction === 'd'){index = j;}
+              
+              if(postsArr[j].title < postsArr[index].title && direction === '-t'){
+                index = j;
+              }
+              else if(postsArr[j].title > postsArr[index].title && direction === 't'){
+                index = j;
+              }
+              else if(postsArr[j].body < postsArr[index].body && direction === '-d'){
+                index = j;
+              }
+              else if(postsArr[j].body > postsArr[index].body && direction === 'd'){
+                index = j;
+              }
             }
             let temp = postsArr[i];
             postsArr[i] = postsArr[index];
             postsArr[index] = temp; 
           }
         }
-        if(currentSort==='t'){Sort(sortByTitle);}
-        else if(currentSort==='d'){Sort(sortByDescription);}
+        if(currentSort==='t'){
+          Sort(sortByTitle);
+        }
+        else if(currentSort==='d'){
+          Sort(sortByDescription);
+        }
         if(postsArr.length < 10){
           const emptyPost = {
             id:null,
@@ -69,11 +100,26 @@ function App() {
   }
   const handlePageSwitch = (direction)=> {
     if(direction==='next'){
-      if(currentPage >= totalPages){setCurrentPage(totalPages)}
-      else{setMax(max=>max+10);setMin(min=>min+10);setCurrentPage(currentPage => currentPage + 1);}
-    }else if(direction==='previous'){
-      if(currentPage <= 1){setCurrentPage(1);setMax(10);setMin(0);}
-      else{setMax(max=>max-10);setMin(min=>min-10);setCurrentPage(currentPage => currentPage - 1);}
+      if(currentPage >= totalPages){
+        setCurrentPage(totalPages)
+      }
+      else{
+        setMax(max=>max+10);
+        setMin(min=>min+10);
+        setCurrentPage(currentPage => currentPage + 1);
+      }
+    }
+    else if(direction==='previous'){
+      if(currentPage <= 1){
+        setCurrentPage(1);
+        setMax(10);
+        setMin(0);
+      }
+      else{
+        setMax(max=>max-10);
+        setMin(min=>min-10);
+        setCurrentPage(currentPage => currentPage - 1);
+      }
     }else {
       setMax(direction*10);
       setMin(direction*10 - 10);
@@ -83,14 +129,32 @@ function App() {
   const setSortType = (orderType)=> {
     //t  = title, d = body 'description'
     if(orderType==='id'){
-      if(sortById==='id'){setSortById('-id');setCurrentSort('id');}
-      else {setSortById('id');setCurrentSort('id');}
+      if(sortById==='id'){
+        setSortById('-id');
+        setCurrentSort('id');
+      }
+      else {
+        setSortById('id');
+        setCurrentSort('id');
+      }
     }else if(orderType==='t'){
-      if(sortByTitle ==='t'){setSortByTitle('-t');setCurrentSort('t');}
-      else {setSortByTitle('t');setCurrentSort('t');}
+      if(sortByTitle ==='t'){
+        setSortByTitle('-t');
+        setCurrentSort('t');
+      }
+      else {
+        setSortByTitle('t');
+        setCurrentSort('t');
+      }
     }else if(orderType==='d'){
-      if(sortByDescription==='d'){setSortByDescription('-d');setCurrentSort('d');}
-      else {setSortByDescription('d');setCurrentSort('d');}
+      if(sortByDescription==='d'){
+        setSortByDescription('-d');
+        setCurrentSort('d');
+      }
+      else {
+        setSortByDescription('d');
+        setCurrentSort('d');
+      }
     }
   }
  
